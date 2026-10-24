@@ -16,7 +16,9 @@ from typing import Dict, List, Optional
 
 import requests
 
-SUPABASE_URL = os.environ.get("SUPABASE_URL", "").rstrip("/")
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "").strip().rstrip("/")
+if SUPABASE_URL.endswith("/rest/v1"):
+    SUPABASE_URL = SUPABASE_URL[: -len("/rest/v1")]
 SUPABASE_KEY = os.environ.get("SUPABASE_SERVICE_KEY", "")
 SQLITE_PATH = os.environ.get(
     "SQLITE_PATH", os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "trips.db"))
